@@ -13,3 +13,7 @@ states/
 # Optional
 .env
 .env.local
+
+# Compiler files
+cache/
+out/
