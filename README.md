@@ -23,6 +23,7 @@ ALCHEMY_API_KEY=
 - After execution, the giver should receive the total USDC from these notes.
 
 ```bash
+$ forge install
 $ forge test -vvv
 ```
 
