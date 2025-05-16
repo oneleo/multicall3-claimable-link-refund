@@ -7,9 +7,9 @@ import {console} from "forge-std/console.sol";
 import {IClaimableLink} from "@claimable-link/interfaces/IClaimableLink.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-import {UnclaimedLinks, IMulticall3} from "src/libraries/UnclaimedLinks.sol";
+import {UnclaimedLinks, IMulticall3} from "src/abstract/UnclaimedLinks.sol";
 
-contract BatchRefundTest is Test {
+contract BatchRefundTest is Test, UnclaimedLinks {
     uint256 arbitrumFork;
 
     IERC20 usdcContract;
@@ -44,7 +44,7 @@ contract BatchRefundTest is Test {
     }
 
     function testBatchRefund() public {
-        IMulticall3.Call[] memory multicall3Call = UnclaimedLinks.buildAggregateCalldata();
+        IMulticall3.Call[] memory multicall3Call = buildAggregateCalldata();
 
         uint256 giverUsdcBalanceBefore = usdcContract.balanceOf(giver);
         uint256 claimableLinkBalanceBefore = usdcContract.balanceOf(claimableLinkAddress);

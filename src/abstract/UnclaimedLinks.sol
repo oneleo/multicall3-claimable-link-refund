@@ -4,13 +4,13 @@ pragma solidity ^0.8.29;
 import {IClaimableLink} from "@claimable-link/interfaces/IClaimableLink.sol";
 import {IMulticall3} from "@multicall3/interfaces/IMulticall3.sol";
 
-library UnclaimedLinks {
+abstract contract UnclaimedLinks {
     uint256 private constant _linksCount = 168;
     address private constant _claimableLinkContractAddress = 0x79EE808918cc91Cca19454206dc7027e4fa4A473;
     address private constant _giverAddress = 0x1234A72239ecbA742D9A00C6Bec87b5a4ABF481a;
     address private constant _tokenAddress = 0xaf88d065e77c8cC2239327C5EDb3A432268e5831;
 
-    function buildAggregateCalldata() external pure returns (IMulticall3.Call[] memory) {
+    function buildAggregateCalldata() public pure returns (IMulticall3.Call[] memory) {
         uint256[] memory transferIds = _getTransferIds();
         IMulticall3.Call[] memory calls = new IMulticall3.Call[](_linksCount);
 
