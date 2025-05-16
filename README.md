@@ -1,66 +1,50 @@
-## Foundry
+# Batch Refund Tool
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repository helps a specific [giver](https://www.arbiscan.io/address/0x1234A72239ecbA742D9A00C6Bec87b5a4ABF481a) reclaim unclaimed [USDC](https://www.arbiscan.io/address/0xaf88d065e77c8cC2239327C5EDb3A432268e5831) from the [ClaimableLink](https://www.arbiscan.io/address/0x79EE808918cc91Cca19454206dc7027e4fa4A473) contract on Arbitrum One.
 
-Foundry consists of:
+## Environment Setup
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- Copy the example file and edit:
 
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+```bash
+$ cp .env.example .env
 ```
 
-### Test
+- Set the following variables in `.env`:
 
-```shell
-$ forge test
+```env
+RELAYER_PRIVATE_KEY=0x
+
+# https://dashboard.alchemy.com/apps/
+ALCHEMY_API_KEY=
+ARB_MAINNET_NODE_RPC_URL=https://arb-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}
 ```
 
-### Format
+## Run Local Fork Test
 
-```shell
-$ forge fmt
+- Simulates a batch refund of 168 expired deposit notes on a forked Arbitrum network.
+- After execution, the giver should receive the total USDC from these notes.
+
+```bash
+$ forge test -vvv
 ```
 
-### Gas Snapshots
+## Execute Batch Refund Script
 
-```shell
-$ forge snapshot
+- Ensure the relayer wallet has some ETH for gas.
+- After running, verify that the giver received the refunded USDC.
+
+```bash
+$ chmod +x script/BatchRefund.sh
+$ script/BatchRefund.sh
 ```
 
-### Anvil
+## Appendix: Query giver's USDC balance
 
-```shell
-$ anvil
-```
+```bash
+$ RPC_URL="https://arbitrum-one-rpc.publicnode.com" \
+&& USDC_ADDRESS="0xaf88d065e77c8cC2239327C5EDb3A432268e5831" \
+&& GIVER_ADDRESS="0x1234A72239ecbA742D9A00C6Bec87b5a4ABF481a"
 
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+$ cast to-unit $(cast to-dec $(cast call ${USDC_ADDRESS} "balanceOf(address account)" ${GIVER_ADDRESS} --rpc-url ${RPC_URL})) $(cast call ${USDC_ADDRESS} "function decimals() public view returns (uint8)" --rpc-url ${RPC_URL})
 ```
