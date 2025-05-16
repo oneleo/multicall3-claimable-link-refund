@@ -7,3 +7,6 @@
 [submodule "lib/labs-poc"]
 	path = lib/labs-poc
 	url = git@github.com:consenlabs/labs-poc.git
+[submodule "lib/delegation-framework"]
+	path = lib/delegation-framework
+	url = https://github.com/MetaMask/delegation-framework.git

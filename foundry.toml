@@ -5,7 +5,9 @@ libs = ["lib"]
 remappings = [
     "forge-std/=lib/forge-std/src/",
     "@claimable-link/=lib/labs-poc/claimable-link/contract/src/",
-    "@multicall3/=lib/multicall3/src/"
+    "lib/labs-poc/:@oz=lib/labs-poc/claimable-link/contract/lib/openzeppelin-contracts/contracts/",
+    "@multicall3/=lib/multicall3/src/",
+    "@delegation-framework/=lib/delegation-framework/src/",
 ]
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
