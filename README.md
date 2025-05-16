@@ -1,6 +1,6 @@
 # Batch Refund Tool
 
-This repository helps a specific [giver](https://www.arbiscan.io/address/0x1234A72239ecbA742D9A00C6Bec87b5a4ABF481a) reclaim unclaimed [USDC](https://www.arbiscan.io/address/0xaf88d065e77c8cC2239327C5EDb3A432268e5831) from the [ClaimableLink](https://www.arbiscan.io/address/0x79EE808918cc91Cca19454206dc7027e4fa4A473) contract on Arbitrum One.
+This repository helps a specific [giver](https://www.arbiscan.io/address/0x1234A72239ecbA742D9A00C6Bec87b5a4ABF481a) refund unclaimed [USDC](https://www.arbiscan.io/address/0xaf88d065e77c8cC2239327C5EDb3A432268e5831) from the [ClaimableLink](https://www.arbiscan.io/address/0x79EE808918cc91Cca19454206dc7027e4fa4A473) contract on Arbitrum One.
 
 ## Environment Setup
 
@@ -14,10 +14,7 @@ $ cp .env.example .env
 
 ```env
 RELAYER_PRIVATE_KEY=0x
-
-# https://dashboard.alchemy.com/apps/
 ALCHEMY_API_KEY=
-ARB_MAINNET_NODE_RPC_URL=https://arb-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}
 ```
 
 ## Run Local Fork Test
