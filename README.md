@@ -46,3 +46,10 @@ $ RPC_URL="https://arbitrum-one-rpc.publicnode.com" \
 
 $ cast to-unit $(cast to-dec $(cast call ${USDC_ADDRESS} "balanceOf(address account)" ${GIVER_ADDRESS} --rpc-url ${RPC_URL})) $(cast call ${USDC_ADDRESS} "function decimals() public view returns (uint8)" --rpc-url ${RPC_URL})
 ```
+
+## Appendix: Execute Batch Refund Script Using Raw Calldata
+
+```bash
+$ chmod +x script/CalldataRefund.sh
+$ script/CalldataRefund.sh
+```
